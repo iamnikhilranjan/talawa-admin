@@ -202,7 +202,6 @@
     "@types/react-dom": "^19.1.1",
     "whatwg-url": "^14.0.0",
     "core-js": "^3.40.0",
-    "rimraf": "^6.1.2",
     "sync-fetch": "npm:@ardatan/sync-fetch@0.0.1",
     "rc-color-picker": {
       "react": "^19.1.0",
