@@ -155,6 +155,7 @@
     "lint-staged": "^16.2.3",
     "nyc": "^17.1.0",
     "prettier": "^3.6.2",
+    "rimraf": "^6.1.2",
     "sass": "^1.93.3",
     "start-server-and-test": "^2.0.12",
     "tsx": "^4.19.1",
@@ -202,6 +203,7 @@
     "@types/react-dom": "^19.1.1",
     "whatwg-url": "^14.0.0",
     "core-js": "^3.40.0",
+    "rimraf": "^6.1.2",
     "sync-fetch": "npm:@ardatan/sync-fetch@0.0.1",
     "rc-color-picker": {
       "react": "^19.1.0",
