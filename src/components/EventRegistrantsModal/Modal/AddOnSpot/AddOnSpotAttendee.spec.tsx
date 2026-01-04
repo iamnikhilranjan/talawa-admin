@@ -51,9 +51,11 @@ const MOCKS = [
             id: '1',
           },
           authenticationToken: 'mock-access-token',
+          refreshToken: 'mock-refresh-token',
         },
       },
     },
+    delay: 150, // Add delay to capture loading state
   },
 ];
 
@@ -74,7 +76,7 @@ const ERROR_MOCKS = [
 
 const renderAddOnSpotAttendee = (): RenderResult => {
   return render(
-    <MockedProvider mocks={MOCKS}>
+    <MockedProvider mocks={MOCKS} addTypename={false}>
       <Provider store={store}>
         <I18nextProvider i18n={i18nForTest}>
           <BrowserRouter>
@@ -88,6 +90,7 @@ const renderAddOnSpotAttendee = (): RenderResult => {
 
 describe('AddOnSpotAttendee Component', () => {
   afterEach(() => {
+    vi.clearAllMocks();
     vi.restoreAllMocks();
   });
   beforeEach(() => {
@@ -263,13 +266,17 @@ describe('AddOnSpotAttendee Component', () => {
     const genderSelect = screen.getByLabelText('Gender');
     fireEvent.change(genderSelect, { target: { value: 'Male' } });
 
+    // Verify initial state before submission
     const submitButton = screen.getByRole('button', { name: /add/i });
     expect(submitButton).not.toBeDisabled();
+    expect(screen.queryByTestId('loading-state')).not.toBeInTheDocument();
 
     fireEvent.submit(screen.getByTestId('onspot-attendee-form'));
 
+    // Wait for button to become disabled and loading state to appear
     await waitFor(() => {
-      expect(submitButton).toBeDisabled();
+      expect(screen.getByRole('button', { name: /add/i })).toBeDisabled();
+      expect(screen.getByTestId('loading-state')).toBeInTheDocument();
     });
   });
 });
